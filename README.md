@@ -10,4 +10,4 @@ This application will allow you two combine two images of cats.
 
 ## Run Project
 
-### `npm start`
+### `node index`
