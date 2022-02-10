@@ -13,12 +13,17 @@ const urlCreator = param => `${baseUrl+param}?width=${width}&height=${height}&co
 // generating requests
 const requestCreator = message => axios.get(urlCreator(message), { responseType: 'arraybuffer' });
 
+// merge images
+function mergeImages (firstImg, secImg) {
+  return mergeImg([Buffer.from(firstImg, 'binary'), Buffer.from(secImg, 'binary')])
+    .then(img => img.write('catass.png', () => console.log('Image saved!')));
+}
+
 // fetch images and merge
 async function createImage() {
     try {
         const [firstImg, secImg] = await axios.all([requestCreator(greeting), requestCreator(who)]);
-        mergeImg([Buffer.from(firstImg.data, 'binary'), Buffer.from(secImg.data, 'binary')])
-            .then(img => img.write('catass.png', () => console.log('Image saved!')));
+        await mergeImages(firstImg.data, secImg.data);
     } catch (error) {
       console.error(error);
     }
