@@ -11,3 +11,5 @@ This application will allow you two combine two images of cats.
 ## Run Project
 
 ### `node index`
+
+or with custom arguments `node index --who=me`
